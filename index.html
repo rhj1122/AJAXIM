@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AJAX IM</title>
+<link type="text/css" rel="stylesheet" href="css/base.css" />
+<link type="text/css" rel="stylesheet" href="css/ajaxim.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+
+<style type="text/css">
+.tempPosition{
+	position:relative;
+	top:400px;
+	left:300px;
+}
+</style>
+
+<style type="text/css">
+
+
+
+</style>
+</head>
+
+
+
+<body style="height:2000px;">
+
+<div id="ajaxim" class="ajaxim tempPosition">
+	<!-- <div id="msgBox" class="msgBox"></div> -->
+    <div id="msgBox" class="msgBox">
+        <div class="msgBox-header">
+            <div class="header-title">
+            	<span class="title-bg-l">
+            		<span class="title-bg-r">这里是用户名</span>
+            	</span>
+            </div>
+            
+            <menu class="header-menu">
+                <li id="msg-minimize" class="minimize" title="最小化"></li>
+                <li id="msg-close" class="close" title="关闭"></li>
+            </menu>
+        </div>
+        
+        <div>
+            <div id="msgBox-msgArea" class="msgBox-msgArea">
+                <div class="single-msg">
+                    <div class="single-msg-photo">
+                        <img width="35" height="35" src="http://hdn.xnimg.cn/photos/hdn321/20110428/2030/tiny_lsqV_30850b019118.jpg">
+                    </div>
+                    
+                    <div class="single-msg-text marL10-9hack">
+                        <p>这里是消这里是消息的内容这里是消息的内容这里是消息的内容</p>
+                        <span class="single-msg-time fr">16:22</span>
+                    </div>
+                </div>
+                
+                <div class="single-msg">
+                    <div class="single-msg-photo fr">
+                        <img width="35" height="35" src="http://hdn.xnimg.cn/photos/hdn321/20110428/2030/tiny_lsqV_30850b019118.jpg">
+                    </div>
+                    
+                    <div class="single-msg-text">
+                        <p>这里是消息的内容这里是消息的内容的内容这里是消息的内容这里是消息的内容这里是消息的内容</p>
+                        <span class="single-msg-time fr">16:42</span>
+                    </div>
+                </div>
+                
+                <div class="single-msg">
+                    <div class="single-msg-photo">
+                        <img width="35" height="35" src="http://hdn.xnimg.cn/photos/hdn321/20110428/2030/tiny_lsqV_30850b019118.jpg">
+                    </div>
+                    
+                    <div class="single-msg-text marL10-9hack">
+                        <p>是消息的内容这里是消息的内容是消息的内容这里是消息的内容是消息的内容这里是消息的内容是消息的内容这里是消息的内容</p>
+                        <span class="single-msg-time fr">16:42</span>
+                    </div>
+            	</div>
+            </div>
+            
+            <footer class="msgBox-editArea">
+                <div class="editArea-toolbar">
+                <!--
+                    <a class="wp-chat-feelings" title="添加表情" onclick="return false;" href="#nogo"></a>
+                -->
+                	<a class="msgBox-history">聊天记录</a>
+                </div>
+                <form action="" method="post">
+                    <textarea id="msgBox-textarea" class="msgBox-textarea"></textarea>
+                    <a id="msgBox-sendBtn" class="msgBox-sendBtn"></a>
+                </form>
+            </footer>
+		</div>
+    </div>
+
+	<a id="msgBtn" class="msgBtn"></a>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-1.3.1.js"></script>
+<script type="text/javascript" src="js/ajax-logic.js"></script>
+<script type="text/javascript">
+
+(function(){
+	$("#msgBtn").bind("click",function(){
+		$("#msgBox").toggleClass("show");
+	});
+	$("#msg-minimize").bind("click",function(){
+		$("#msgBox").removeClass("show");
+	});
+	
+	
+	$("#msgBox-sendBtn").bind("click",function(){
+		var data = $("#msgBox-textarea").val();
+		if(typeof data != "undefined"){
+			sendMsg(data);
+		}
+	});
+	
+})();
+
+
+
+
+
+//存取数据库示例代码段
+(function(){
+	
+	//写入和查询数据库示例数据
+	var data = {"name":"芒果","password":"dangligedang","sex":"女"};
+	
+	$.ajax({
+		type : "POST",
+		url  : "server/connect.jsp",
+		data : data,
+		success : function(re){
+			var data = null;
+			if(typeof JSON != "undefined"){
+				data = JSON.parse(decodeURIComponent(re));
+			}else{
+				data = eval("(" + decodeURIComponent(re) + ")");
+			}
+			console.log(re);
+		},
+		error: function(a,b,c){
+			console.log(b);
+		},
+		complete: function(){
+			console.log("请求完成");
+		}
+	});
+	alert("测试请求发出");
+})();
+//存取数据库示例代码段结束
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
